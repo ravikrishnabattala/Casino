@@ -5,7 +5,7 @@ LABEL authors="ravik"
 
 WORKDIR /app
 COPY . .
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # ---------- Runtime stage ----------
 FROM eclipse-temurin:17-jdk
