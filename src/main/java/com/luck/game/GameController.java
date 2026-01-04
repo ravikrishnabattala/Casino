@@ -21,7 +21,7 @@ public class GameController {
         return "Game is running!";
     }
 
-    @GetMapping("/{number}")
+    @GetMapping("/{number:[0-9]+}")
     public String guess(@PathVariable("number") int number) {
 
         if (number > secretNumber) {
