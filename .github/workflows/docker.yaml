@@ -1,0 +1,21 @@
+name: Casino-Game-Cl
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Build Image
+        run: docker build -t ravikrishna1269/tryyourluck:${{ github.sha }} .
+
+      - name: Push Image
+        run: docker push ravikrishna1269/tryyourluck:${{ github.sha }}
