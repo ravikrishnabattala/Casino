@@ -15,7 +15,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Build Image
-        run: docker build -t ravikrishna1269/tryyourluck:${{ github.sha }} .
+        run: docker build -t ravikrishna1269/casino:${{ github.sha }} .
 
       - name: Push Image
-        run: docker push ravikrishna1269/tryyourluck:${{ github.sha }}
+        run: docker push ravikrishna1269/casino:${{ github.sha }}
