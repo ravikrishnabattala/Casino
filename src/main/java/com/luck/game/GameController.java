@@ -9,16 +9,25 @@ import java.util.Random;
 @RequestMapping("/")
 public class GameController {
 
-    private final int secretNumber;
+    private int secretNumber;
 
     public GameController() {
+        generateNewNumber();
+    }
+
+    private void generateNewNumber() {
         this.secretNumber = new Random().nextInt(100) + 1;
-        System.out.println("Secret number is: " + secretNumber);
+        System.out.println("New secret number: " + secretNumber);
     }
 
     @GetMapping("/")
     public String home() {
-        return "Game is running!";
+        return """
+                🎮 Welcome to Guess The Number Game!
+                Guess a number between 1 and 100.
+                Try: /50
+                Restart game: /reset
+                """;
     }
 
     @GetMapping("/{number:[0-9]+}")
@@ -31,5 +40,11 @@ public class GameController {
         } else {
             return "Correct! You found the number!";
         }
+    }
+
+    @GetMapping("/reset")
+    public String reset() {
+        generateNewNumber();
+        return "🔄 Game restarted! Guess again.";
     }
 }
